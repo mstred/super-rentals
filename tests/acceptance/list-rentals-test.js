@@ -23,7 +23,10 @@ module('Acceptance | list rentals', function(hooks) {
     assert.equal(currentURL(), '/contact', 'should navigate to /contact route');
   });
 
-  test('should list available rentals.', async function (/*assert*/) {
+  test('should list available rentals.', async function (assert) {
+    await visit('/');
+    let listings = this.element.querySelectorAll('article.listing') || [];
+    assert.equal(listings.length, 3, 'should display 3 listings');
   });
 
   test('should filter the list of rentals by city.', async function (/*assert*/) {
