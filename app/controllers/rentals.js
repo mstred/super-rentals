@@ -9,7 +9,7 @@ export default Controller.extend({
         store.query('rental', {location}) :
         store.findAll('rental');
 
-      return results;
+      return results.then(results => { return {location, results}; });
     }
   }
 });

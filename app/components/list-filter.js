@@ -4,18 +4,19 @@ export default Component.extend({
   classNames: ['list-filter'],
   value: '',
 
-  setResults(results) {
-    this.set('results', results);
-  },
-
   init() {
     this._super(...arguments);
-    this.filter().then(this.setResults.bind(this));
+    this.filter().then(data => this.set('results', data.results));
   },
 
   actions: {
     handleFilterEntry() {
-      this.filter(this.value).then(this.setResults.bind(this));
+      let location = this.value;
+      this.filter(location).then(data => {
+        if (data.location === location) {
+          this.set('results', data.results);
+        }
+      });
     }
   }
 });
