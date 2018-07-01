@@ -64,5 +64,13 @@ export default function() {
     }
   }];
 
-  this.get('/rentals', () => { return { "data": rentals }; });
+  this.get('/rentals', (db, request) => {
+    let location = (request.queryParams.location || '').toLowerCase();
+
+    let data = (location) ?
+      rentals.filter(rental => rental.attributes.location.toLowerCase().indexOf(location) !== -1) :
+      rentals;
+
+    return { data };
+  });
 }
