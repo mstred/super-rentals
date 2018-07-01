@@ -5,6 +5,10 @@
   {{#link-to "about" class="button"}}About Us{{/link-to}}
 </div>
 
-{{#each model as |rental|}}
-  {{rental-tile rental=rental}}
-{{/each}}
+{{#list-filter filter=(action 'filterByLocation') as |results|}}
+  <ul class="results">
+    {{#each results as |rental|}}
+      <li>{{rental-tile rental=rental}}</li>
+    {{/each}}
+  </ul>
+{{/list-filter}}
